@@ -15,18 +15,23 @@ export const Card: React.FC<CardProps> = ({ title, icon, tags, children }) => {
         {icon}
         <Text>{title}</Text>
       </Flex>
-      <Flex sx={{ gap: 2, mb: 4 }}>
+      <Flex sx={{ gap: 1, mb: 2, flexWrap: 'wrap' }}>
         {tags.map(tag => (
           <Box
             key={tag}
             sx={{
-              fontSize: 0,
-              px: 2,
-              py: 1,
+              fontSize: '10px',
+              px: '6px',
+              height: '18px',
+              display: 'inline-flex',
+              alignItems: 'center',
               borderRadius: 4,
-              bg: 'borderColor',
-              color: 'text',
-              opacity: 0.8
+              bg: 'primary',
+              color: 'white',
+              opacity: 0.9,
+              fontWeight: 'bold',
+              lineHeight: 1,
+              letterSpacing: '0.02em'
             }}
           >
             {tag}
