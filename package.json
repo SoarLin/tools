@@ -13,8 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@theme-ui/presets": "^0.17.4",
+    "lucide-react": "^1.14.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "theme-ui": "^0.17.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
