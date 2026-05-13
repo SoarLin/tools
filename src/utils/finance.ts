@@ -48,26 +48,35 @@ export const calculatePenalty = (paidAmount: number, estimatedDate: string, actu
 };
 
 /**
- * 定期定額投資報酬計算
- * @param monthlyAmount 每月投入金額 (元)
+ * 定期定額或單筆投資報酬計算
+ * @param amount 投入金額 (元)
  * @param annualRate 年化報酬率 (%)
  * @param totalMonths 總投資月數
+ * @param isMonthly 是否為每月投入 (false 則視為單筆)
  * @returns 投資結果
  */
-export const calculateInvestment = (monthlyAmount: number, annualRate: number, totalMonths: number) => {
+export const calculateInvestment = (amount: number, annualRate: number, totalMonths: number, isMonthly: boolean = true) => {
   const r = annualRate / 100 / 12; // 月利率
   const n = totalMonths;
-  const p = monthlyAmount;
+  const p = amount;
 
   let futureValue = 0;
-  if (r === 0) {
-    futureValue = p * n;
+  let totalInvestment = 0;
+
+  if (isMonthly) {
+    totalInvestment = p * n;
+    if (r === 0) {
+      futureValue = totalInvestment;
+    } else {
+      // 定期定額 (期初投入): FV = P * ((1+r)^n - 1) / r * (1+r)
+      futureValue = p * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    }
   } else {
-    // 期初投入公式: FV = P * ((1+r)^n - 1) / r * (1+r)
-    futureValue = p * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    // 單筆投資: FV = P * (1+r)^n
+    totalInvestment = p;
+    futureValue = p * Math.pow(1 + r, n);
   }
 
-  const totalInvestment = p * n;
   const profit = futureValue - totalInvestment;
   const profitRate = totalInvestment > 0 ? (profit / totalInvestment) * 100 : 0;
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Label, Input, Button, Text, Grid } from 'theme-ui';
+import { Box, Label, Input, Button, Text, Grid, Flex } from 'theme-ui';
+import { RotateCcw } from 'lucide-react';
 import { calculatePenalty } from '../utils/finance';
 
 export const DeveloperPenaltyCalculator: React.FC = () => {
@@ -18,33 +19,40 @@ export const DeveloperPenaltyCalculator: React.FC = () => {
     setResult(calculation);
   };
 
+  const handleReset = () => {
+    setEstimatedDate('2023-10-20');
+    setActualDate('2026-02-06');
+    setPaidAmount('199');
+    setResult(null);
+  };
+
   return (
     <Box as="form" onSubmit={handleSubmit}>
-      <Grid gap={3}>
+      <Grid gap={2}>
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, color: 'text', opacity: 0.7 }}>預計使照申請日期</Label>
+          <Label mb={1} sx={{ fontSize: 0, color: 'text', opacity: 0.7 }}>預計使照申請日期</Label>
           <Input 
             type="date" 
             value={estimatedDate} 
             onChange={(e) => setEstimatedDate(e.target.value)} 
             required
-            sx={{ bg: 'muted', borderColor: 'borderColor' }}
+            sx={{ py: 2, bg: 'muted', borderColor: 'borderColor' }}
           />
         </Box>
 
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, color: 'text', opacity: 0.7 }}>實際申請到使用執照日期</Label>
+          <Label mb={1} sx={{ fontSize: 0, color: 'text', opacity: 0.7 }}>實際申請到使用執照日期</Label>
           <Input 
             type="date" 
             value={actualDate} 
             onChange={(e) => setActualDate(e.target.value)} 
             required
-            sx={{ bg: 'muted', borderColor: 'borderColor' }}
+            sx={{ py: 2, bg: 'muted', borderColor: 'borderColor' }}
           />
         </Box>
 
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, color: 'text', opacity: 0.7 }}>已繳房地價金</Label>
+          <Label mb={1} sx={{ fontSize: 0, color: 'text', opacity: 0.7 }}>已繳房地價金</Label>
           <Box sx={{ position: 'relative' }}>
             <Input 
               type="number" 
@@ -53,13 +61,31 @@ export const DeveloperPenaltyCalculator: React.FC = () => {
               placeholder="例如: 199"
               step="any"
               required
-              sx={{ pr: 5, bg: 'muted', borderColor: 'borderColor' }}
+              sx={{ py: 2, pr: 5, bg: 'muted', borderColor: 'borderColor' }}
             />
-            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 1, color: 'text', opacity: 0.5 }}>萬元</Text>
+            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 0, color: 'text', opacity: 0.5 }}>萬元</Text>
           </Box>
         </Box>
 
-        <Button type="submit" sx={{ mt: 2 }}>計算</Button>
+        <Flex sx={{ gap: 2, mt: 1 }}>
+          <Button type="submit" sx={{ flex: 1, py: 2 }}>計算</Button>
+          <Button 
+            type="button" 
+            onClick={handleReset} 
+            sx={{ 
+              px: 3, 
+              bg: 'muted', 
+              color: 'text', 
+              border: '1px solid', 
+              borderColor: 'borderColor',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <RotateCcw size={16} />
+          </Button>
+        </Flex>
       </Grid>
 
       {result !== null && (

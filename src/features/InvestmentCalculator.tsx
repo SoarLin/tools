@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Label, Input, Button, Text, Grid, Flex, Radio } from 'theme-ui';
+import { RotateCcw } from 'lucide-react';
 import { calculateInvestment } from '../utils/finance';
 
 export const InvestmentCalculator: React.FC = () => {
-  const [monthlyAmount, setMonthlyAmount] = useState<string>('3000');
+  const [paymentMode, setPaymentMode] = useState<'monthly' | 'lumpSum'>('monthly');
+  const [amount, setAmount] = useState<string>('3000');
   const [startDate, setStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
   
   const [durationMode, setDurationMode] = useState<'date' | 'years'>('years');
@@ -33,61 +35,108 @@ export const InvestmentCalculator: React.FC = () => {
       const end = new Date(endDate);
       if (end > start) {
         totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-        // 如果天數也有差異，至少算一個月
         if (totalMonths <= 0) totalMonths = 1;
       }
     }
 
     if (totalMonths > 0) {
       const calculation = calculateInvestment(
-        parseFloat(monthlyAmount),
+        parseFloat(amount),
         parseFloat(annualReturn),
-        totalMonths
+        totalMonths,
+        paymentMode === 'monthly'
       );
       setResult(calculation);
     }
   };
 
+  const handleReset = () => {
+    setPaymentMode('monthly');
+    setAmount('3000');
+    setStartDate(new Date().toISOString().split('T')[0]);
+    setDurationMode('years');
+    setEndDate(() => {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() + 1);
+      return d.toISOString().split('T')[0];
+    });
+    setYears('3');
+    setAnnualReturn('8.5');
+    setResult(null);
+  };
+
   return (
     <Box as="form" onSubmit={handleCalculate}>
-      <Grid gap={3}>
+      <Grid gap={2}>
+        {/* 投資方式 */}
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, opacity: 0.7 }}>每月投入金額</Label>
+          <Label mb={1} sx={{ fontSize: 0, opacity: 0.7 }}>投資方式</Label>
+          <Flex sx={{ gap: 3, mb: 1 }}>
+            <Label sx={{ alignItems: 'center', fontSize: 0, cursor: 'pointer' }}>
+              <Radio 
+                name="paymentMode" 
+                checked={paymentMode === 'monthly'} 
+                onChange={() => {
+                  setPaymentMode('monthly');
+                  if (amount === '100000') setAmount('3000');
+                }}
+              /> 
+              定期定額
+            </Label>
+            <Label sx={{ alignItems: 'center', fontSize: 0, cursor: 'pointer' }}>
+              <Radio 
+                name="paymentMode" 
+                checked={paymentMode === 'lumpSum'} 
+                onChange={() => {
+                  setPaymentMode('lumpSum');
+                  if (amount === '3000') setAmount('100000');
+                }}
+              /> 
+              單筆投資
+            </Label>
+          </Flex>
+        </Box>
+
+        {/* 投入金額 */}
+        <Box>
+          <Label mb={1} sx={{ fontSize: 0, opacity: 0.7 }}>
+            {paymentMode === 'monthly' ? '每月投入金額' : '單筆投入金額'}
+          </Label>
           <Box sx={{ position: 'relative' }}>
             <Input 
               type="number" 
-              value={monthlyAmount} 
-              onChange={(e) => setMonthlyAmount(e.target.value)}
-              sx={{ pr: 5, bg: 'muted', borderColor: 'borderColor' }}
+              value={amount} 
+              onChange={(e) => setAmount(e.target.value)}
+              sx={{ py: 2, pr: 5, bg: 'muted', borderColor: 'borderColor' }}
               required
             />
-            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 1, opacity: 0.5 }}>元</Text>
+            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 0, color: 'text', opacity: 0.5 }}>元</Text>
           </Box>
         </Box>
 
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, opacity: 0.7 }}>開始日期</Label>
+          <Label mb={1} sx={{ fontSize: 0, opacity: 0.7 }}>開始日期</Label>
           <Input 
             type="date" 
             value={startDate} 
             onChange={(e) => setStartDate(e.target.value)}
-            sx={{ bg: 'muted', borderColor: 'borderColor' }}
+            sx={{ py: 2, bg: 'muted', borderColor: 'borderColor' }}
             required
           />
         </Box>
 
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, opacity: 0.7 }}>投資期間</Label>
-          <Flex sx={{ gap: 3, mb: 2 }}>
-            <Label sx={{ alignItems: 'center', fontSize: 1, cursor: 'pointer' }}>
+          <Label mb={1} sx={{ fontSize: 0, opacity: 0.7 }}>投資期間</Label>
+          <Flex sx={{ gap: 3, mb: 1 }}>
+            <Label sx={{ alignItems: 'center', fontSize: 0, cursor: 'pointer' }}>
               <Radio 
                 name="durationMode" 
                 checked={durationMode === 'date'} 
                 onChange={() => setDurationMode('date')}
               /> 
-              指定截止日
+              截止日
             </Label>
-            <Label sx={{ alignItems: 'center', fontSize: 1, cursor: 'pointer' }}>
+            <Label sx={{ alignItems: 'center', fontSize: 0, cursor: 'pointer' }}>
               <Radio 
                 name="durationMode" 
                 checked={durationMode === 'years'} 
@@ -102,7 +151,7 @@ export const InvestmentCalculator: React.FC = () => {
               type="date" 
               value={endDate} 
               onChange={(e) => setEndDate(e.target.value)}
-              sx={{ bg: 'muted', borderColor: 'borderColor' }}
+              sx={{ py: 2, bg: 'muted', borderColor: 'borderColor' }}
               required
             />
           ) : (
@@ -111,30 +160,48 @@ export const InvestmentCalculator: React.FC = () => {
                 type="number" 
                 value={years} 
                 onChange={(e) => setYears(e.target.value)}
-                sx={{ pr: 5, bg: 'muted', borderColor: 'borderColor' }}
+                sx={{ py: 2, pr: 5, bg: 'muted', borderColor: 'borderColor' }}
                 required
               />
-              <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 1, opacity: 0.5 }}>年</Text>
+              <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 0, opacity: 0.5 }}>年</Text>
             </Box>
           )}
         </Box>
 
         <Box>
-          <Label mb={2} sx={{ fontSize: 1, opacity: 0.7 }}>預估年化報酬率 (0050平均約 8.5%)</Label>
+          <Label mb={1} sx={{ fontSize: 0, opacity: 0.7 }}>預估年化報酬率</Label>
           <Box sx={{ position: 'relative' }}>
             <Input 
               type="number" 
               value={annualReturn} 
               onChange={(e) => setAnnualReturn(e.target.value)}
               step="0.1"
-              sx={{ pr: 5, bg: 'muted', borderColor: 'borderColor' }}
+              sx={{ py: 2, pr: 5, bg: 'muted', borderColor: 'borderColor' }}
               required
             />
-            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 1, opacity: 0.5 }}>%</Text>
+            <Text sx={{ position: 'absolute', right: 3, top: '50%', transform: 'translateY(-50%)', fontSize: 0, opacity: 0.5 }}>%</Text>
           </Box>
         </Box>
 
-        <Button type="submit" sx={{ mt: 2 }}>計算報酬</Button>
+        <Flex sx={{ gap: 2, mt: 1 }}>
+          <Button type="submit" sx={{ flex: 1, py: 2 }}>計算報酬</Button>
+          <Button 
+            type="button" 
+            onClick={handleReset} 
+            sx={{ 
+              px: 3, 
+              bg: 'muted', 
+              color: 'text', 
+              border: '1px solid', 
+              borderColor: 'borderColor',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <RotateCcw size={16} />
+          </Button>
+        </Flex>
       </Grid>
 
       {result && (

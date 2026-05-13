@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react'
-import { ThemeProvider, Box, Flex, Heading, Text, Grid, Container } from 'theme-ui'
-import { Calculator, LayoutGrid, Scale, TrendingUp } from 'lucide-react'
+import { ThemeProvider, Box, Flex, Heading, Text, Container } from 'theme-ui'
+import { Calculator, LayoutGrid, Scale, TrendingUp, Activity } from 'lucide-react'
 import { Card, TagButton } from './components/Common'
 import { MortgageCalculator } from './features/MortgageCalculator'
 import { DeveloperPenaltyCalculator } from './features/DeveloperPenaltyCalculator'
 import { InvestmentCalculator } from './features/InvestmentCalculator'
+import { HealthCalculator } from './features/HealthCalculator'
 import { theme } from './theme'
 import type { Tool } from './types'
 
@@ -28,12 +29,20 @@ function App() {
     },
     {
       id: 'investment',
-      title: '定期定額投資計算',
-      tags: ['金融', '投資'],
+      title: '投資計算',
+      tags: ['金融', '投資', '計算機'],
       icon: <TrendingUp size={20} />,
       component: <InvestmentCalculator />
+    },
+    {
+      id: 'health',
+      title: '健康數值計算 (BMI/BMR/TDEE)',
+      tags: ['健康', '計算機'],
+      icon: <Activity size={20} />,
+      component: <HealthCalculator />
     }
   ], [])
+
 
   const allTags = useMemo(() => {
     const tags = new Set<string>(['全部'])
@@ -45,6 +54,15 @@ function App() {
     if (activeTag === '全部') return tools
     return tools.filter(tool => tool.tags.includes(activeTag))
   }, [activeTag, tools])
+
+  // 將工具分配到不同的列中以實現 Masonry 佈局
+  const columns = useMemo(() => {
+    const cols: Tool[][] = [[], [], []]
+    filteredTools.forEach((tool, index) => {
+      cols[index % 3].push(tool)
+    })
+    return cols
+  }, [filteredTools])
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,18 +86,31 @@ function App() {
             ))}
           </Flex>
 
-          <Grid gap={4} columns={[1, null, 2, 3]}>
-            {filteredTools.map(tool => (
-              <Card
-                key={tool.id}
-                title={tool.title}
-                icon={tool.icon}
-                tags={tool.tags}
+          <Flex sx={{ gap: 4, alignItems: 'start', flexWrap: ['wrap', null, 'nowrap'] }}>
+            {columns.map((column, colIdx) => (
+              <Flex 
+                key={colIdx} 
+                sx={{ 
+                  flexDirection: 'column', 
+                  gap: 4, 
+                  flex: 1, 
+                  minWidth: ['100%', null, '300px'],
+                  display: colIdx >= 2 && filteredTools.length < 3 ? ['none', null, 'flex'] : 'flex'
+                }}
               >
-                {tool.component}
-              </Card>
+                {column.map(tool => (
+                  <Card
+                    key={tool.id}
+                    title={tool.title}
+                    icon={tool.icon}
+                    tags={tool.tags}
+                  >
+                    {tool.component}
+                  </Card>
+                ))}
+              </Flex>
             ))}
-          </Grid>
+          </Flex>
 
           {filteredTools.length === 0 && (
             <Flex sx={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 6, opacity: 0.3 }}>
