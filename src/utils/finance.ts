@@ -46,3 +46,35 @@ export const calculatePenalty = (paidAmount: number, estimatedDate: string, actu
     days: diffDays
   };
 };
+
+/**
+ * 定期定額投資報酬計算
+ * @param monthlyAmount 每月投入金額 (元)
+ * @param annualRate 年化報酬率 (%)
+ * @param totalMonths 總投資月數
+ * @returns 投資結果
+ */
+export const calculateInvestment = (monthlyAmount: number, annualRate: number, totalMonths: number) => {
+  const r = annualRate / 100 / 12; // 月利率
+  const n = totalMonths;
+  const p = monthlyAmount;
+
+  let futureValue = 0;
+  if (r === 0) {
+    futureValue = p * n;
+  } else {
+    // 期初投入公式: FV = P * ((1+r)^n - 1) / r * (1+r)
+    futureValue = p * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+  }
+
+  const totalInvestment = p * n;
+  const profit = futureValue - totalInvestment;
+  const profitRate = totalInvestment > 0 ? (profit / totalInvestment) * 100 : 0;
+
+  return {
+    totalInvestment: Math.round(totalInvestment),
+    expectedValue: Math.round(futureValue),
+    profit: Math.round(profit),
+    profitRate: parseFloat(profitRate.toFixed(2))
+  };
+};

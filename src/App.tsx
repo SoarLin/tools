@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react'
 import { ThemeProvider, Box, Flex, Heading, Text, Grid, Container } from 'theme-ui'
-import { Calculator, LayoutGrid, Scale } from 'lucide-react'
+import { Calculator, LayoutGrid, Scale, TrendingUp } from 'lucide-react'
 import { Card, TagButton } from './components/Common'
 import { MortgageCalculator } from './features/MortgageCalculator'
 import { DeveloperPenaltyCalculator } from './features/DeveloperPenaltyCalculator'
+import { InvestmentCalculator } from './features/InvestmentCalculator'
 import { theme } from './theme'
 import type { Tool } from './types'
 
@@ -24,6 +25,13 @@ function App() {
       tags: ['金融', '法律', '房地產'],
       icon: <Scale size={20} />,
       component: <DeveloperPenaltyCalculator />
+    },
+    {
+      id: 'investment',
+      title: '定期定額投資計算',
+      tags: ['金融', '投資'],
+      icon: <TrendingUp size={20} />,
+      component: <InvestmentCalculator />
     }
   ], [])
 
