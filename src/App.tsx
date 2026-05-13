@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import { ThemeProvider, Box, Flex, Heading, Text, Container } from 'theme-ui'
-import { Calculator, LayoutGrid, Scale, TrendingUp, Activity } from 'lucide-react'
+import { Calculator, LayoutGrid, Scale, TrendingUp, Activity, Maximize } from 'lucide-react'
 import { Card, TagButton } from './components/Common'
 import { MortgageCalculator } from './features/MortgageCalculator'
 import { DeveloperPenaltyCalculator } from './features/DeveloperPenaltyCalculator'
 import { InvestmentCalculator } from './features/InvestmentCalculator'
 import { HealthCalculator } from './features/HealthCalculator'
+import { AreaConverter } from './features/AreaConverter'
 import { theme } from './theme'
 import type { Tool } from './types'
 
@@ -16,7 +17,7 @@ function App() {
     {
       id: 'mortgage',
       title: '房貸試算',
-      tags: ['金融', '計算機'],
+      tags: ['金融', '房地產', '計算機'],
       icon: <Calculator size={20} />,
       component: <MortgageCalculator />
     },
@@ -33,6 +34,13 @@ function App() {
       tags: ['金融', '投資', '計算機'],
       icon: <TrendingUp size={20} />,
       component: <InvestmentCalculator />
+    },
+    {
+      id: 'area-converter',
+      title: '坪數換算器',
+      tags: ['房地產', '計算機'],
+      icon: <Maximize size={20} />,
+      component: <AreaConverter />
     },
     {
       id: 'health',

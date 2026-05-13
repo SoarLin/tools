@@ -100,12 +100,9 @@ export const HealthCalculator: React.FC = () => {
           <Button 
             type="button" 
             onClick={handleReset} 
+            variant="secondary"
             sx={{ 
               px: 3, 
-              bg: 'muted', 
-              color: 'text', 
-              border: '1px solid', 
-              borderColor: 'borderColor',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'

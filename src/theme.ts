@@ -59,6 +59,19 @@ export const theme: Theme = {
         bg: '#535bf2',
       },
     },
+    secondary: {
+      bg: 'muted',
+      color: 'text',
+      border: '1px solid',
+      borderColor: 'borderColor',
+      cursor: 'pointer',
+      transition: 'all 0.2s',
+      '&:hover': {
+        bg: 'borderColor',
+        borderColor: 'primary',
+        color: 'primary',
+      },
+    },
     tag: {
       borderRadius: 9999,
       bg: 'muted',
