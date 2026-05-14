@@ -7,7 +7,8 @@ export const theme: Theme = {
     ...system.colors,
     primary: '#646cff',
     secondary: '#61dafb',
-    background: '#242424',
+    accent: '#2a6f97', // 深沉穩重的藍色，適合顯示價錢
+    background: '#ffffff',
     text: 'rgba(255, 255, 255, 0.87)',
     muted: '#1a1a1a',
     cardBg: '#1f1f1f',
@@ -88,6 +89,24 @@ export const theme: Theme = {
         bg: 'primary',
         color: 'white',
       },
+    },
+    nav: {
+      fontSize: 2,
+      fontWeight: 'bold',
+      color: 'text',
+      pb: 2,
+      cursor: 'pointer',
+      transition: 'all 0.2s',
+      borderBottom: '3px solid transparent',
+      opacity: 0.6,
+      '&:hover': {
+        opacity: 1,
+      },
+      '&.active': {
+        opacity: 1,
+        color: 'primary',
+        borderBottomColor: 'primary',
+      }
     },
   },
 }

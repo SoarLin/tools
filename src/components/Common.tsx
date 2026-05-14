@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Flex, Button, Text } from 'theme-ui';
+import type { ThemeUIStyleObject } from 'theme-ui';
 
 interface CardProps {
   title: string;
@@ -47,9 +48,10 @@ interface TagButtonProps {
   label: string;
   isActive: boolean;
   onClick: () => void;
+  sx?: ThemeUIStyleObject;
 }
 
-export const TagButton: React.FC<TagButtonProps> = ({ label, isActive, onClick }) => {
+export const TagButton: React.FC<TagButtonProps> = ({ label, isActive, onClick, sx }) => {
   return (
     <Button
       variant="tag"
@@ -58,6 +60,10 @@ export const TagButton: React.FC<TagButtonProps> = ({ label, isActive, onClick }
       sx={{
         backgroundColor: isActive ? 'primary' : 'muted',
         color: isActive ? 'white' : 'text',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...sx
       }}
     >
       {label}
