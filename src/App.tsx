@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { ThemeProvider, Box, Flex, Heading, Text, Container } from 'theme-ui'
-import { Calculator, LayoutGrid, Scale, TrendingUp, Activity, Maximize, Package, Database } from 'lucide-react'
+import { Calculator, LayoutGrid, Scale, TrendingUp, Activity, Maximize, Package, Home } from 'lucide-react'
 import { Card, TagButton } from './components/Common'
 import { MortgageCalculator } from './features/MortgageCalculator'
 import { DeveloperPenaltyCalculator } from './features/DeveloperPenaltyCalculator'
@@ -12,8 +12,18 @@ import { theme } from './theme'
 import type { Tool } from './types'
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'tools' | 'data'>('tools')
+  const [activeTab, setActiveTab] = useState<'tools' | 'data'>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    return tab === 'data' ? 'data' : 'tools';
+  })
   const [activeTag, setActiveTag] = useState<string>('全部')
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', activeTab);
+    window.history.replaceState({}, '', url.toString());
+  }, [activeTab]);
 
   const tools: Tool[] = useMemo(() => [
     {
@@ -101,7 +111,7 @@ function App() {
               onClick={() => setActiveTab('data')}
               sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
             >
-              <Database size={20} /> 新屋筆記
+              <Home size={20} /> 新屋筆記
             </Box>
           </Flex>
 
