@@ -167,6 +167,17 @@ const ITEMS: FurnitureItem[] = [
     status: 'planned',
     url: 'https://24h.pchome.com.tw/prod/DPAI1H-1900HIGGT',
     tags: ['陽台', '設備']
+  },
+  {
+    id: '12',
+    name: '熱水器',
+    brand: 'SAKURA 櫻花 DH1605A',
+    productName: '屋內型智能恆溫熱水器DH1605A(天然瓦斯)',
+    price: 15840,
+    specs: '寬345ｘ深158ｘ高493mm',
+    status: 'planned',
+    url: 'https://24h.pchome.com.tw/prod/DPAL03-A900AVIKJ',
+    tags: ['陽台', '設備']
   }
 ];
 
@@ -221,7 +232,7 @@ export const HomeJourney: React.FC = () => {
   const moveInCountdown = useMemo(() => {
     const target = new Date('2026/09/20');
     const today = new Date();
-    
+
     if (today >= target) return '已到達入住日';
 
     let months = (target.getFullYear() - today.getFullYear()) * 12 + (target.getMonth() - today.getMonth());
@@ -311,15 +322,15 @@ export const HomeJourney: React.FC = () => {
             <Divider sx={{ my: 3, borderColor: 'borderColor', opacity: 0.1 }} />
 
             <Grid columns={[1, 1, 2]} gap={3} sx={{ textAlign: 'left' }}>
-              <InfoField 
-                label="坪數組成 (共 27.99 坪)" 
-                value="主 16.57 + 附 2.18 + 公 9.23" 
-                note="公設比：33%" 
+              <InfoField
+                label="坪數組成 (共 27.99 坪)"
+                value="主 16.57 + 附 2.18 + 公 9.23"
+                note="公設比：33%"
               />
-              <InfoField 
-                label="預計入住日期" 
-                value="2026 / 09 / 20 (日)" 
-                note={moveInCountdown} 
+              <InfoField
+                label="預計入住日期"
+                value="2026 / 09 / 20 (日)"
+                note={moveInCountdown}
               />
             </Grid>
             </Box>
