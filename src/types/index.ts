@@ -11,6 +11,7 @@ export type PurchaseStatus = 'purchased' | 'ordered' | 'planned';
 export interface FurnitureItem {
   id: string;
   name: string;
+  brand?: string;
   productName: string;
   price: number;
   specs: string;

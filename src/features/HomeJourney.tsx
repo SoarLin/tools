@@ -38,6 +38,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '1',
     name: '升降桌(小)',
+    brand: 'FUNTE',
     productName: 'Mini+ 電動升降桌(三節式)',
     price: 13700,
     specs: '寬100 深60cm, 煙草橡木 + 黑腳',
@@ -49,6 +50,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '2',
     name: '升降桌(大)',
+    brand: 'FUNTE',
     productName: 'Prime 電動升降桌 三節式',
     price: 16400,
     specs: '寬150 深60cm, 煙草橡木 + 黑腳',
@@ -60,7 +62,8 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '3',
     name: '床墊',
-    productName: '美格蘭特-Villa飯店系列-6*6.2尺',
+    brand: '床的世界-美格蘭特',
+    productName: 'Villa飯店系列-6*6.2尺',
     price: 46800,
     specs: '寬180 長188cm 厚度約30cm',
     url: 'https://www.beddingworldbed.com.tw/products/villa-6',
@@ -72,6 +75,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '4',
     name: '後掀床架',
+    brand: '日興木業行',
     productName: '唯美繃布掀床',
     price: 22400,
     specs: '寬183 長191cm 高32 深24',
@@ -84,6 +88,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '5',
     name: '沙發',
+    brand: '拓家家具',
     productName: 'Monroe夢露 可調式頭枕滑動沙發',
     price: 57290,
     specs: '寬205 深100cm 高105 扶手寬12.5 腳高12 座高40cm',
@@ -96,6 +101,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '6',
     name: '餐桌',
+    brand: '東稻家居',
     productName: '亮面岩板折合餐桌',
     price: 9990,
     specs: '長110, 150 寬70 高76cm',
@@ -107,6 +113,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '7',
     name: '餐椅',
+    brand: '東稻家居',
     productName: '諾艾莉 橘色貓抓皮餐椅 x 2',
     price: 3980,
     specs: '寬51 深58 高81',
@@ -118,6 +125,7 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '8',
     name: '廚下淨水',
+    brand: 'EVERPOLL 愛科濾淨 EP-168+RO-600',
     productName: '廚下型雙溫無壓飲水機+直出RO淨水器',
     price: 27455,
     specs: 'RO: 長40 x 寬14 x 高33\n飲水: 長41 x 寬19.2 x 高30.5',
@@ -129,7 +137,8 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '9',
     name: '全戶淨水',
-    productName: '傳家寶全戶濾淨200噸 FH-200',
+    brand: 'EVERPOLL 愛科濾淨 FH-200',
+    productName: '傳家寶全戶濾淨200噸',
     price: 20000,
     specs: '高 35.2 x 直徑15.9',
     status: 'ordered',
@@ -140,7 +149,8 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '10',
     name: '冰箱',
-    productName: 'SHARP 夏普 SJ-MW51KT-H 504公升五門冰箱(尊爵灰)',
+    brand: 'SHARP 夏普 SJ-MW51KT-H',
+    productName: ' 504公升左右開任意門變頻五門冰箱(尊爵灰)',
     price: 47900,
     specs: '寬65 深 68.4 高 183.8cm\n安裝: 寬66~69 深69.1 高189',
     status: 'planned',
@@ -150,7 +160,8 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '11',
     name: '洗烘衣機',
-    productName: 'Panasonic 國際牌12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
+    brand: 'Panasonic 國際牌 NA-VS120RW-B+NH-VS100HP-B',
+    productName: '12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
     price: 56520,
     specs: '洗衣: 寬59.6 深66 高84.5\n烘衣: 寬59.6 深66.7 高84.5\n安裝: 寬64 深71 高180',
     status: 'planned',
@@ -181,6 +192,53 @@ export const HomeJourney: React.FC = () => {
   const totalFilteredPrice = useMemo(() => {
     return filteredItems.reduce((acc, curr) => acc + curr.price, 0);
   }, [filteredItems]);
+
+  const purchaseDuration = useMemo(() => {
+    const start = new Date('2021/10/29');
+    const today = new Date();
+
+    let years = today.getFullYear() - start.getFullYear();
+    const startMonth = start.getMonth();
+    const todayMonth = today.getMonth();
+    const startDate = start.getDate();
+    const todayDate = today.getDate();
+
+    // 如果還沒到當年的月份，或到了月份但還沒到當天，則年數減 1
+    if (todayMonth < startMonth || (todayMonth === startMonth && todayDate < startDate)) {
+      years--;
+    }
+
+    // 計算剩下的天數
+    const lastAnniversary = new Date(start);
+    lastAnniversary.setFullYear(start.getFullYear() + years);
+    const diffTime = today.getTime() - lastAnniversary.getTime();
+    const remainingDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (years === 0) return `${remainingDays} 天`;
+    return `${years} 年又 ${remainingDays} 天`;
+  }, []);
+
+  const moveInCountdown = useMemo(() => {
+    const target = new Date('2026/09/20');
+    const today = new Date();
+    
+    if (today >= target) return '已到達入住日';
+
+    let months = (target.getFullYear() - today.getFullYear()) * 12 + (target.getMonth() - today.getMonth());
+    const tempDate = new Date(today);
+    tempDate.setMonth(today.getMonth() + months);
+
+    if (tempDate > target) {
+      months--;
+      tempDate.setMonth(today.getMonth() + months);
+    }
+
+    const diffTime = target.getTime() - tempDate.getTime();
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (months === 0) return `剩餘 ${days} 天`;
+    return `還有 ${months} 個月又 ${days} 天`;
+  }, []);
 
   // 分配家具到不同的列中以實現真正的 Masonry 佈局 (桌機 4 欄, 寬度平均分配)
   const columns = useMemo(() => {
@@ -245,21 +303,27 @@ export const HomeJourney: React.FC = () => {
                 valueColor="accent"
                 note={`單價：${(1537 / 27.99).toFixed(1)} 萬/坪`}
               />
-              <InfoField label="下定日期" value="2021 / 10 / 29" note="星期五" />
+              <InfoField label="下定日期" value="2021 / 10 / 29 (五)" note={`距今已過 ${purchaseDuration}`} />
               <InfoField label="交通資訊" value="新北產業園區站" note="機捷 / 環狀線雙捷交會" />
               <InfoField label="詳細地址" value="新莊頭前重劃區" note="新北市新莊區福美街267號9樓" />
             </Grid>
 
             <Divider sx={{ my: 3, borderColor: 'borderColor', opacity: 0.1 }} />
 
-            <InfoField
-              label="坪數組成 (共 27.99 坪)"
-              value="主 16.57 + 附 2.18 + 公 9.23"
-              note="公設比：33%"
-            />
-          </Box>
-        )}
-      </Card>
+            <Grid columns={[1, 1, 2]} gap={3} sx={{ textAlign: 'left' }}>
+              <InfoField 
+                label="坪數組成 (共 27.99 坪)" 
+                value="主 16.57 + 附 2.18 + 公 9.23" 
+                note="公設比：33%" 
+              />
+              <InfoField 
+                label="預計入住日期" 
+                value="2026 / 09 / 20 (日)" 
+                note={moveInCountdown} 
+              />
+            </Grid>
+            </Box>
+            )}      </Card>
 
       {/* 家電家具區塊 - Portfolio 樣式 */}
       <Box sx={{ mb: 5 }}>

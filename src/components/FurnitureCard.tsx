@@ -42,16 +42,16 @@ export const FurnitureCard: React.FC<FurnitureCardProps> = ({ item }) => {
         {/* Tags */}
         <Flex sx={{ gap: 1, flexWrap: 'wrap', flex: 1 }}>
           {item.tags.map(tag => (
-            <Badge 
-              key={tag} 
-              sx={{ 
-                bg: 'rgba(100, 108, 255, 0.1)', 
-                color: 'primary', 
-                fontSize: '9px', 
-                px: 2, 
-                py: 0, 
-                height: '18px', 
-                display: 'inline-flex', 
+            <Badge
+              key={tag}
+              sx={{
+                bg: 'rgba(100, 108, 255, 0.1)',
+                color: 'primary',
+                fontSize: '9px',
+                px: 2,
+                py: 0,
+                height: '18px',
+                display: 'inline-flex',
                 alignItems: 'center',
                 border: '1px solid',
                 borderColor: 'rgba(100, 108, 255, 0.3)'
@@ -64,24 +64,24 @@ export const FurnitureCard: React.FC<FurnitureCardProps> = ({ item }) => {
         {/* Link Icon */}
         {item.url && (
           <Box sx={{ flexShrink: 0 }}>
-            <a 
-              href={item.url} 
-              target="_blank" 
+            <a
+              href={item.url}
+              target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'inherit' }}
             >
-              <IconButton 
-                sx={{ 
-                  cursor: 'pointer', 
-                  p: 0, 
+              <IconButton
+                sx={{
+                  cursor: 'pointer',
+                  p: 0,
                   width: '18px',
                   height: '18px',
-                  color: 'text', 
-                  opacity: 0.3, 
+                  color: 'text',
+                  opacity: 0.3,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  '&:hover': { opacity: 1, color: 'primary' } 
+                  '&:hover': { opacity: 1, color: 'primary' }
                 }}
               >
                 <ExternalLink size={14} />
@@ -115,8 +115,15 @@ export const FurnitureCard: React.FC<FurnitureCardProps> = ({ item }) => {
         </Flex>
       </Box>
 
+      {item.brand && (
+        <Box sx={{ mb: 2, textAlign: 'left' }}>
+          <Text sx={{ fontSize: '10px', lineHeight: '16px', opacity: 0.5, display: 'block', fontWeight: 'bold', textAlign: 'left' }}>品牌</Text>
+          <Text sx={{ fontSize: '14px', lineHeight: '20px', textAlign: 'left', display: 'block' }}>{item.brand}</Text>
+        </Box>
+      )}
+
       <Box sx={{ mb: 2, textAlign: 'left' }}>
-        <Text sx={{ fontSize: '10px', lineHeight: '16px', opacity: 0.5, display: 'block', fontWeight: 'bold', textAlign: 'left' }}>產品型號</Text>
+        <Text sx={{ fontSize: '10px', lineHeight: '16px', opacity: 0.5, display: 'block', fontWeight: 'bold', textAlign: 'left' }}>產品名稱</Text>
         <Text sx={{ fontSize: '14px', lineHeight: '20px', textAlign: 'left', display: 'block' }}>{item.productName || '----'}</Text>
       </Box>
 
