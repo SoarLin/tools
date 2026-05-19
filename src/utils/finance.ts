@@ -5,18 +5,29 @@
  * @param annualRate 年利率 (%)
  * @returns 每月還款額 (元)
  */
-export const calculateMortgage = (amount: number, years: number, annualRate: number): number => {
+export const calculateMortgage = (amount: number, years: number, annualRate: number) => {
   const p = amount * 10000; // 萬元轉元
   const r = annualRate / 100 / 12; // 年利率轉月利率
   const n = years * 12; // 年轉月
 
-  if (p <= 0 || n <= 0) return 0;
-  if (r === 0) return Math.round(p / n);
+  if (p <= 0 || n <= 0) return { monthly: 0, totalInterest: 0 };
+  
+  let monthly = 0;
+  if (r === 0) {
+    monthly = Math.round(p / n);
+  } else {
+    // 公式: [P * r * (1+r)^n] / [(1+r)^n - 1]
+    const x = Math.pow(1 + r, n);
+    monthly = (p * x * r) / (x - 1);
+  }
 
-  // 公式: [P * r * (1+r)^n] / [(1+r)^n - 1]
-  const x = Math.pow(1 + r, n);
-  const monthly = (p * x * r) / (x - 1);
-  return Math.round(monthly);
+  const totalRepayment = monthly * n;
+  const totalInterest = totalRepayment - p;
+
+  return {
+    monthly: Math.round(monthly),
+    totalInterest: Math.round(totalInterest)
+  };
 };
 
 /**
