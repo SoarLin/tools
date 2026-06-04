@@ -40,7 +40,7 @@ const ITEMS: FurnitureItem[] = [
     name: '升降桌(小)',
     brand: 'FUNTE',
     productName: 'Mini+ 電動升降桌(三節式)',
-    price: 13700,
+    price: 12530,
     specs: '寬100 深60cm, 煙草橡木 + 黑腳',
     url: 'https://www.funtetw.com/products/mini-standing-desk-coupled',
     status: 'purchased',
@@ -101,25 +101,25 @@ const ITEMS: FurnitureItem[] = [
   {
     id: '6',
     name: '餐桌',
-    brand: '東稻家居',
-    productName: '亮面岩板折合餐桌',
-    price: 9990,
-    specs: '長110, 150 寬70 高76cm',
+    brand: 'Hoi! 好好生活',
+    productName: 'WH喜日橡膠木實木岩板餐桌1.1M原木色WSJ54R09',
+    price: 7180,
+    specs: '寬70 長110 高75',
     status: 'ordered',
-    deposit: 0,
-    note: '網址消失，可能要重新找',
+    deposit: 7180,
+    url: 'https://www.hoihome.tw/SalePage/Index/10773928',
     tags: ['餐廳', '桌子'],
   },
   {
     id: '7',
     name: '餐椅',
-    brand: '東稻家居',
-    productName: '諾艾莉 橘色貓抓皮餐椅 x 2',
-    price: 3980,
-    specs: '寬51 深58 高81',
+    brand: 'Hoi! 好好生活',
+    productName: 'YW富士山橡木實木仿皮扶手椅2入組 原木色+奶茶色',
+    price: 7980,
+    specs: '寬55 長53 高78',
     status: 'ordered',
-    deposit: 0,
-    note: '網址消失，可能要重新找',
+    deposit: 7980,
+    url: 'https://www.hoihome.tw/SalePage/Index/11293232',
     tags: ['餐廳', '椅子']
   },
   {
@@ -157,17 +157,17 @@ const ITEMS: FurnitureItem[] = [
     url: 'https://24h.pchome.com.tw/prod/DPAC6X-A900GYX7E',
     tags: ['廚房', '設備']
   },
-  {
-    id: '11',
-    name: '洗烘衣機',
-    brand: 'Panasonic 國際牌 NA-VS120RW-B+NH-VS100HP-B',
-    productName: '12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
-    price: 56520,
-    specs: '洗衣: 寬59.6 深66 高84.5\n烘衣: 寬59.6 深66.7 高84.5\n安裝: 寬64 深71 高180',
-    status: 'planned',
-    url: 'https://24h.pchome.com.tw/prod/DPAI1H-1900HIGGT',
-    tags: ['陽台', '設備']
-  },
+  // {
+  //   id: '11',
+  //   name: '洗烘衣機',
+  //   brand: 'Panasonic 國際牌 NA-VS120RW-B+NH-VS100HP-B',
+  //   productName: '12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
+  //   price: 56520,
+  //   specs: '洗衣: 寬59.6 深66 高84.5\n烘衣: 寬59.6 深66.7 高84.5\n安裝: 寬64 深71 高180',
+  //   status: 'planned',
+  //   url: 'https://24h.pchome.com.tw/prod/DPAI1H-1900HIGGT',
+  //   tags: ['陽台', '設備']
+  // },
   {
     id: '12',
     name: '熱水器',
@@ -177,6 +177,17 @@ const ITEMS: FurnitureItem[] = [
     specs: '寬345ｘ深158ｘ高493mm',
     status: 'planned',
     url: 'https://24h.pchome.com.tw/prod/DPAL03-A900AVIKJ',
+    tags: ['陽台', '設備']
+  },
+  {
+    id: '13',
+    name: '洗烘衣機',
+    brand: 'Panasonic 國際牌 NA-V120HDH-G',
+    productName: '12公斤溫水洗脫烘滾筒洗衣機(乾衣8公斤)',
+    price: 21912,
+    specs: '寬59.5 深59.5 高85',
+    status: 'planned',
+    url: 'https://24h.pchome.com.tw/prod/DPAI1H-A900AMJJK',
     tags: ['陽台', '設備']
   }
 ];
