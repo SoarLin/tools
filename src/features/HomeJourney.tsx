@@ -157,19 +157,8 @@ const ITEMS: FurnitureItem[] = [
     url: 'https://24h.pchome.com.tw/prod/DPAC6X-A900GYX7E',
     tags: ['廚房', '設備']
   },
-  // {
-  //   id: '11',
-  //   name: '洗烘衣機',
-  //   brand: 'Panasonic 國際牌 NA-VS120RW-B+NH-VS100HP-B',
-  //   productName: '12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
-  //   price: 56520,
-  //   specs: '洗衣: 寬59.6 深66 高84.5\n烘衣: 寬59.6 深66.7 高84.5\n安裝: 寬64 深71 高180',
-  //   status: 'planned',
-  //   url: 'https://24h.pchome.com.tw/prod/DPAI1H-1900HIGGT',
-  //   tags: ['陽台', '設備']
-  // },
   {
-    id: '12',
+    id: '11',
     name: '熱水器',
     brand: 'SAKURA 櫻花 DH1605A',
     productName: '屋內型智能恆溫熱水器DH1605A(天然瓦斯)',
@@ -179,15 +168,38 @@ const ITEMS: FurnitureItem[] = [
     url: 'https://24h.pchome.com.tw/prod/DPAL03-A900AVIKJ',
     tags: ['陽台', '設備']
   },
+  // {
+  //   id: '12',
+  //   name: '洗烘衣機',
+  //   brand: 'Panasonic 國際牌 NA-VS120RW-B+NH-VS100HP-B',
+  //   productName: '12公斤洗脫滾筒洗衣機+10公斤熱泵式乾衣機',
+  //   price: 56520,
+  //   specs: '洗衣: 寬59.6 深66 高84.5\n烘衣: 寬59.6 深66.7 高84.5\n安裝: 寬64 深71 高180',
+  //   status: 'planned',
+  //   url: 'https://24h.pchome.com.tw/prod/DPAI1H-1900HIGGT',
+  //   tags: ['陽台', '設備']
+  // },
+  // {
+  //   id: '13',
+  //   name: '洗烘衣機',
+  //   brand: 'Panasonic 國際牌 NA-V120HDH-G',
+  //   productName: '12公斤溫水洗脫烘滾筒洗衣機(乾衣8公斤)',
+  //   price: 21912,
+  //   specs: '寬59.5 深59.5 高85',
+  //   status: 'planned',
+  //   url: 'https://24h.pchome.com.tw/prod/DPAI1H-A900AMJJK',
+  //   tags: ['陽台', '設備']
+  // },
   {
-    id: '13',
+    id: '14',
     name: '洗烘衣機',
-    brand: 'Panasonic 國際牌 NA-V120HDH-G',
-    productName: '12公斤溫水洗脫烘滾筒洗衣機(乾衣8公斤)',
-    price: 21912,
-    specs: '寬59.5 深59.5 高85',
+    brand: 'LG WD-S1310B',
+    productName: '13公斤+10公斤WashTower AI智控熱泵除濕式洗乾衣機',
+    price: 65900,
+    specs: '寬60 深66 高165.5',
     status: 'planned',
-    url: 'https://24h.pchome.com.tw/prod/DPAI1H-A900AMJJK',
+    url: 'https://24h.pchome.com.tw/prod/DPAI1L-A900GL45J',
+    note: '洗衣 1000W 乾衣 960W',
     tags: ['陽台', '設備']
   }
 ];
