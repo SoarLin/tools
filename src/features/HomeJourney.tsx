@@ -338,17 +338,22 @@ export const HomeJourney: React.FC = () => {
                 note={`單價：${(1537 / 27.99).toFixed(1)} 萬/坪`}
               />
               <InfoField label="下定日期" value="2021 / 10 / 29 (五)" note={`距今已過 ${purchaseDuration}`} />
-              <InfoField label="交通資訊" value="新北產業園區站" note="機捷 / 環狀線雙捷交會" />
               <InfoField label="詳細地址" value="新莊頭前重劃區" note="新北市新莊區福美街267號9樓" />
+              <InfoField label="交通資訊" value="新北產業園區站" note="機捷 / 環狀線雙捷交會" />
             </Grid>
 
             <Divider sx={{ my: 3, borderColor: 'borderColor', opacity: 0.1 }} />
 
-            <Grid columns={[1, 1, 2]} gap={3} sx={{ textAlign: 'left' }}>
+            <Grid columns={[1, 3, 3]} gap={3} sx={{ textAlign: 'left' }}>
               <InfoField
                 label="坪數組成 (共 27.99 坪)"
                 value="主 16.57 + 附 2.18 + 公 9.23"
                 note="公設比：33%"
+              />
+              <InfoField
+                label="貸款資訊"
+                value="1231萬, 30年, 2.4%"
+                note="月付額 48002"
               />
               <InfoField
                 label="預計入住日期"

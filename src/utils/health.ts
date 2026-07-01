@@ -14,7 +14,7 @@ export const calculateBMI = (height: number, weight: number) => {
   const bmi = weight / (h * h);
   const value = parseFloat(bmi.toFixed(1));
   
-  let status = '正常';
+  let status: string;
   if (value < 18.5) status = '過輕';
   else if (value >= 18.5 && value < 24) status = '正常';
   else if (value >= 24 && value < 27) status = '過重';

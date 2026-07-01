@@ -12,7 +12,7 @@ export const calculateMortgage = (amount: number, years: number, annualRate: num
 
   if (p <= 0 || n <= 0) return { monthly: 0, totalInterest: 0 };
   
-  let monthly = 0;
+  let monthly: number;
   if (r === 0) {
     monthly = Math.round(p / n);
   } else {
@@ -71,8 +71,8 @@ export const calculateInvestment = (amount: number, annualRate: number, totalMon
   const n = totalMonths;
   const p = amount;
 
-  let futureValue = 0;
-  let totalInvestment = 0;
+  let futureValue: number;
+  let totalInvestment: number;
 
   if (isMonthly) {
     totalInvestment = p * n;
